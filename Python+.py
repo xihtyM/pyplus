@@ -202,6 +202,7 @@ class Main():
     def main():
         global __startTime__;
         path = input("Path: ");
+        print("\n");
         __startTime__ = t.time(); #START CLOCK
         if(os.path.exists(path) != True): print("Path does not exist"); return -1; #PATH EXISTS
         if(5>len(path)): print("Too small"); return -1; #PATH EXTENSION IS TOO SMALL
@@ -222,4 +223,4 @@ Vars.variables["%pi%"] = 3.141592653589793, "const";
 
 mClass = Main.main();
 __endTime__ = t.time(); #END CLOCK
-print("Process finished in",round(__endTime__-__startTime__,7),"seconds with exit code",mClass);
+print("\nProcess finished in",round(__endTime__-__startTime__,7),"seconds with exit code",mClass);
