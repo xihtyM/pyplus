@@ -31,7 +31,7 @@ class Console:
             if(i+1 < len(code)):
                 if(code[i+1] == KeyWords.whitespace or code[i+1] in KeyWords.keywords or LexxedCode in KeyWords.keywords):
                     if(LexxedCode != ""):
-                        print(LexxedCode.replace('\n', '<newline>'));
+                        print(LexxedCode.replace("\n", "<nl>"));
                         LexxedCode = "";
         print(LexxedCode);
     #CHANGE DIRECTORY
