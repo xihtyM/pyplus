@@ -23,16 +23,18 @@ class Console:
     #LEXXER
 
     def lex(self,code):
-        #LOOP THROUGH EVERY CHAR OF THE CODE
+        lexCode = "";
         LexxedCode = "";
+        ParsedCode = "";
         for i,char in enumerate(code):
             if(char != KeyWords.whitespace):
-                LexxedCode += char;
+                lexCode += char;
             if(i+1 < len(code)):
-                if(code[i+1] == KeyWords.whitespace or code[i+1] in KeyWords.keywords or LexxedCode in KeyWords.keywords):
-                    if(LexxedCode != ""):
-                        print(LexxedCode.replace("\n", "<nl>"));
-                        LexxedCode = "";
+                if(code[i+1] == KeyWords.whitespace or code[i+1] in KeyWords.keywords or lexCode in KeyWords.keywords):
+                    if(lexCode != ""):
+                        LexxedCode += lexCode.replace("\n","<nl>")+"\n";
+                        lexCode = "";
+        LexxedCode += lexCode;
         print(LexxedCode);
     #CHANGE DIRECTORY
     
@@ -56,14 +58,22 @@ class Console:
                 self.lex(dir_.read());
         else:
             print("Error 0: Path was not found");
-    
+
+    #CLEAR
+
+    def clear(self):
+        print("Clearing...");
+        os.system("cls");
+        
     #READ INPUT
-    
+
     def run(self,i):
         # Change default directory command
         if(i == "chdir"):
             self.chdir();
         if(i == "py+ compile"):
             self.open();
+        if(i == "clear"):
+            self.clear();
 
 Console();
