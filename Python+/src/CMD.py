@@ -28,10 +28,10 @@ class Console:
     #COMPILER
 
     def compile(self,lc,path):
-        print(lc);
         path = path[0:path.find(".")]+".ppy+";
         with open(path,"w") as writeFile:
             writeFile.write(lc);
+        print("Successfully compiled without errors!");
         
     #LEXXER
 
@@ -42,7 +42,6 @@ class Console:
         
         seperations = code.count('\n')+1;
         prev = 0;
-        print(seperations);
         
         for i in range(seperations):
             # BRANCHLESS WAY OF SAYING IF IT IS THE LAST ITERATION, MAKE IT THE FULL LENGTH OF THE STRING
@@ -94,10 +93,8 @@ class Console:
         # Change default directory command
         if(i == "chdir"):
             self.chdir();
-        # Compile command
         if(i == "py+ compile"):
             self.open();
-        # Clear previous statements command
         if(i == "clear"):
             self.clear();
 
