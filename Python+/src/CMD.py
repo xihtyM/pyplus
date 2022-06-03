@@ -1,3 +1,4 @@
+from distutils.errors import CompileError
 import enum
 import os, time, math;
 from tkinter import *;
@@ -47,14 +48,15 @@ class Console:
             nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
             # REMOVE '\n' AND INDENTS
             c = code[prev:nth].replace("\n","");
-            tabFinished = 0;
             tabs = "";
             for x,v in enumerate(c):
-                if(tabFinished = 0 and v == " "):
+                if(v == " "):
                     tabs += v;
                     continue;
                 break;
             tabs = tabs.replace("    ","\t").replace("\t","1");
+            if(" " in tabs):
+                raise CompileError("Expected indentation at line: ",str(i+1)+"\n"+c.lstrip());
             c = tabs+c.lstrip();
             SeperatedCode.append(c);
             prev = nth;
