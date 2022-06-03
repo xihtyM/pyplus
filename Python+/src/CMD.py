@@ -50,7 +50,7 @@ class Console:
             c = code[prev:nth].replace("\n","<nl>").lstrip();
             SeperatedCode += c;
             prev = nth;
-        print("hello world!");
+        
         self.compile(SeperatedCode,path);
         
     #CHANGE DIRECTORY
