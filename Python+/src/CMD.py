@@ -55,7 +55,7 @@ class Console:
                 break;
             tabs = tabs.replace("    ","\t").replace("\t","1");
             if(" " in tabs):
-                console.warn('Error: Expected indentation at line:',str(i+1)+"\n"+c.lstrip());
+                console.error('Error: Unexpected indentation at line', str(i+1)+"\n"+'Got', tabs.count(" "), '(Expected: 4) spaces\nAt:',c.lstrip());
                 return -1;
             c = tabs+c.lstrip();
             SeperatedCode.append(c);
