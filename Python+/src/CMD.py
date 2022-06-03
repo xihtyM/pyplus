@@ -37,20 +37,13 @@ class Console:
 
     def lex(self,code,path):
         SeperatedCode = "";
-        lexCode = "";
-        LexxedCode = "";
-        
-        seperations = code.count('\n')+1;
-        prev = 0;
-        
-        for i in range(seperations):
-            # BRANCHLESS WAY OF SAYING IF IT IS THE LAST ITERATION, MAKE IT THE FULL LENGTH OF THE STRING
-            nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
-            # REMOVE '\n' AND REPLACE WITH <nl> AND REMOVE ALL SPACES ON THE LEFT
-            c = code[prev:nth].replace("\n","<nl>").lstrip();
-            SeperatedCode += c;
-            prev = nth;
-        
+
+        # REPLACE "\n" AND "\t" WITH "<nl>" AND "<t>"
+
+        SeperatedCode = SeperatedCode.replace("\n","<nl").replace(" ","<t>");
+
+        # 
+
         self.compile(SeperatedCode,path);
         
     #CHANGE DIRECTORY
