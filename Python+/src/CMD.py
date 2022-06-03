@@ -1,7 +1,5 @@
-from distutils.errors import CompileError
-import enum
-from msilib.schema import Error
 import os, time, math;
+from colorama import Fore;
 from tkinter import *;
 
 # ALL PRE-DEFINED VARIABLES
@@ -57,7 +55,8 @@ class Console:
                 break;
             tabs = tabs.replace("    ","\t").replace("\t","1");
             if(" " in tabs):
-                raise Error("Expected indentation at line: ",str(i+1)+"\n"+c.lstrip());
+                print(f'{Fore.RED}Error: Expected indentation at line: ',str(i+1)+"\n"+c.lstrip());
+                return -1;
             c = tabs+c.lstrip();
             SeperatedCode.append(c);
             prev = nth;
