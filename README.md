@@ -5,9 +5,11 @@ To install Python+ simply:
 
 1. Install Python (Preferably latest version)
 2. Run commands in powershell:
+
 ```pip install os```
 
 ```pip install requests```
+
 3. Run the Python+ Installer, specify the directory that you would like it to be installed and the rest should work
 
 
