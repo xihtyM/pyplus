@@ -1,5 +1,6 @@
 from distutils.errors import CompileError
 import enum
+from msilib.schema import Error
 import os, time, math;
 from tkinter import *;
 
@@ -56,7 +57,7 @@ class Console:
                 break;
             tabs = tabs.replace("    ","\t").replace("\t","1");
             if(" " in tabs):
-                raise CompileError("Expected indentation at line: ",str(i+1)+"\n"+c.lstrip());
+                raise Error("Expected indentation at line: ",str(i+1)+"\n"+c.lstrip());
             c = tabs+c.lstrip();
             SeperatedCode.append(c);
             prev = nth;
