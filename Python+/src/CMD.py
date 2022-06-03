@@ -1,3 +1,4 @@
+import enum
 import os, time, math;
 from tkinter import *;
 
@@ -36,15 +37,36 @@ class Console:
     #LEXXER
 
     def lex(self,code,path):
-        SeperatedCode = "";
+        SeperatedCode = [];
+        seperations = code.count("\n")+1;
+        LexxedCode = "";
+        prev = 0;
 
-        # REPLACE "\n" AND "\t" WITH "<nl>" AND "<t>"
+        for i in range(seperations):
+            # BRANCHLESS WAY OF SAYING IF IT IS THE LAST ITERATION, MAKE IT THE FULL LENGTH OF THE STRING
+            nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
+            # REMOVE '\n' AND INDENTS
+            c = code[prev:nth].replace("\n","");
+            tabFinished = 0;
+            tabs = "";
+            for x,v in enumerate(c):
+                if(tabFinished = 0 and v == " "):
+                    tabs += v;
+                    continue;
+                break;
+            tabs = tabs.replace("    ","\t").replace("\t","1");
+            c = tabs+c.lstrip();
+            SeperatedCode.append(c);
+            prev = nth;
 
-        SeperatedCode = SeperatedCode.replace("\n","<nl").replace(" ","<t>");
+        # LEX
 
-        # 
+        for i,line in enumerate(SeperatedCode):
+            c = line;
+            #if(c in KeyWords.mutli_char_keywords):
+            LexxedCode += c + "0";
 
-        self.compile(SeperatedCode,path);
+        self.compile(LexxedCode,path);
         
     #CHANGE DIRECTORY
     
