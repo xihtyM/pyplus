@@ -3,8 +3,8 @@ import subprocess
 
 # implement pip as a subprocess:
 # install libs
-if 'colorama' not in sys.modules:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama']);
+if 'py-console' not in sys.modules:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'py-console']);
 if 'os' not in sys.modules:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'os']);
 if 'tkinter' not in sys.modules:

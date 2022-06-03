@@ -1,5 +1,5 @@
 import os, time, math;
-from colorama import Fore;
+from py_console import console
 from tkinter import *;
 
 # ALL PRE-DEFINED VARIABLES
@@ -55,7 +55,7 @@ class Console:
                 break;
             tabs = tabs.replace("    ","\t").replace("\t","1");
             if(" " in tabs):
-                print(f'{Fore.RED}Error: Expected indentation at line: ',str(i+1)+"\n"+c.lstrip());
+                console.warn('Error: Expected indentation at line:',str(i+1)+"\n"+c.lstrip());
                 return -1;
             c = tabs+c.lstrip();
             SeperatedCode.append(c);
