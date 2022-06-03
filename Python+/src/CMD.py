@@ -6,12 +6,17 @@ from tkinter import *;
 directory = open(os.getcwd()+"\\vars\\dir.txt","r");
 cmdSep = ">>";
 
+def find_nth(text, find, c):
+    start = text.find(find);
+    while(start >= 0 and c > 1):
+        start = text.find(find, start+len(find));
+        c -= 1;
+    return start+1;
+
 class KeyWords:
     mutli_char_keywords = ["print","return","func","let","class","true","false"];
-    operators = ["!=", "==", "+=","-="];
-    single_char_keywords = [";","\n","\\","*",'"',"'",":",".","[","]","(",")","{","}"];
+    seperator = "\n";
     whitespace = " ";
-    keywords = mutli_char_keywords + single_char_keywords + operators;
 
 class Console:
     def __init__(self):
@@ -20,26 +25,39 @@ class Console:
             i = input(self.directory+cmdSep+" ");
             self.run(i);
 
+    #COMPILER
+
+    def compile(self,lc,path):
+        print(lc);
+        path = path[0:path.find(".")]+".ppy+";
+        with open(path,"w") as writeFile:
+            writeFile.write(lc);
+        
     #LEXXER
 
-    def lex(self,code):
+    def lex(self,code,path):
+        SeperatedCode = "";
         lexCode = "";
         LexxedCode = "";
-        ParsedCode = "";
-        for i,char in enumerate(code):
-            if(char != KeyWords.whitespace):
-                lexCode += char;
-            if(i+1 < len(code)):
-                if(code[i+1] == KeyWords.whitespace or code[i+1] in KeyWords.keywords or lexCode in KeyWords.keywords):
-                    if(lexCode != ""):
-                        LexxedCode += lexCode.replace("\n","<nl>")+"\n";
-                        lexCode = "";
-        LexxedCode += lexCode;
-        print(LexxedCode);
+        
+        seperations = code.count('\n')+1;
+        prev = 0;
+        print(seperations);
+        
+        for i in range(seperations):
+            # BRANCHLESS WAY OF SAYING IF IT IS THE LAST ITERATION, MAKE IT THE FULL LENGTH OF THE STRING
+            nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
+            # REMOVE '\n' AND REPLACE WITH <nl> AND REMOVE ALL SPACES ON THE LEFT
+            c = code[prev:nth].replace("\n","<nl>").lstrip();
+            SeperatedCode += c;
+            prev = nth;
+            
+        self.compile(SeperatedCode,path);
+        
     #CHANGE DIRECTORY
     
     def chdir(self):
-        i = input(">> ");
+        i = input(cmdSep+" ");
         if(os.path.exists(i)):
             with open(os.getcwd()+"\\vars\\dir.txt","w") as dir_:
                 if(i[len(i)-1] == "\\" or i[len(i)-1] == "/"):
@@ -52,12 +70,17 @@ class Console:
     #OPEN CODE
 
     def open(self):
-        i = input(">> ");
+        i = input(cmdSep+" ");
         if(os.path.exists(i)):
             with open(i,"r") as dir_:
-                self.lex(dir_.read());
+                self.lex(dir_.read(),i);
         else:
-            print("Error 0: Path was not found");
+            i = self.directory+"\\"+i;
+            if(os.path.exists(i)):
+                with open(i,"r") as dir_:
+                    self.lex(dir_.read(),i);
+            else:
+                print("Error 0: Path was not found");
 
     #CLEAR
 
@@ -71,8 +94,10 @@ class Console:
         # Change default directory command
         if(i == "chdir"):
             self.chdir();
+        # Compile command
         if(i == "py+ compile"):
             self.open();
+        # Clear previous statements command
         if(i == "clear"):
             self.clear();
 
