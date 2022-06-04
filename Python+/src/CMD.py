@@ -24,7 +24,7 @@ class Console:
         self.directory = directory.read();
         while(True):
             i = input(self.directory+cmdSep+" ");
-            self.run(i);
+            self.run(i.lower());
 
     #COMPILER
 
