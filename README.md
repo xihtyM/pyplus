@@ -27,4 +27,4 @@ Some notes:
 
 > Use .py+ extension to code, compiled programs compile to .ppy+, sooner or later I will make an interpreter but right now I'm still creating the compiler.
 
-> Python+ is still in an incomplete state (Roughly 0.25% complete so far), so it wont run anything as of yet.
+> Python+ is still in an incomplete state (Roughly 0.7% complete so far), so it wont run anything as of yet.
