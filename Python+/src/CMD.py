@@ -4,6 +4,7 @@ from tkinter import *;
 
 # ALL PRE-DEFINED VARIABLES
 
+b64 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-/";
 directory = open(os.getcwd()+"\\vars\\dir.txt","r");
 cmdSep = ">>";
 
@@ -13,6 +14,14 @@ def find_nth(text, find, c):
         start = text.find(find, start+len(find));
         c -= 1;
     return start+1;
+
+def base64(i):
+    if(i.isdigit):
+        endText = b64[i];
+        return endText;
+    else:
+        console.error("Cannot be encrypted to base64.");
+        return -1;
 
 class KeyWords:
     multi_char_keywords = ["print","return","func","let","end","true","false","if","else"];
@@ -51,7 +60,8 @@ class Console:
             nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
             # REMOVE '\n' AND INDENTS
             c = code[prev:nth].replace("\n","");
-            for x,v in enumerate(KeyWords.multi_char_keywords): c = c.replace(v,str(x+2));
+            # REPLACES KEYWORDS WITH NUMBER ASSOCIATED WITH IT
+            for x,v in enumerate(KeyWords.multi_char_keywords): c = c.replace(v,base64(x+2));
             tabs = "";
             for x,v in enumerate(c):
                 if(v == " "):
