@@ -43,7 +43,7 @@ class Console:
             with open(path,"w") as writeFile:
                 writeFile.write(lc);
         except Exception as err:
-            console.error("Error opening/writing to file.\n"+err);
+            console.error("Error opening/writing to file.\n"+str(err));
             pass;
         console.success("Successfully compiled without errors!");
         
@@ -125,19 +125,19 @@ class Console:
             try:
                 self.chdir();
             except Exception as err:
-                console.error("Error changing directory.\n"+err);
+                console.error("Error changing directory.\n"+str(err));
                 pass;
         if(i == "py+ compile"):
             try:
                 self.open();
             except Exception as err:
-                console.error("Error opening compiler.\n"+err);
+                console.error("Error opening compiler.\n"+str(err));
                 pass;
         if(i == "clear"):
             try:
                 self.clear();
             except Exception as err:
-                console.error("Error clearing command line.\n"+err);
+                console.error("Error clearing command line.\n"+str(err));
                 pass;
 
 Console();
