@@ -19,7 +19,7 @@ All working commands in the terminal:
 
 ```chdir``` Changes the directory of the compiler.
 
-```py+ compile``` Compiles program, if you are already in the directory then you can enter the name followed by .py+ to compile it. If not, then you can input its path with the name.py+ and it should also work.
+```py+ compile``` Compiles the program, if you are already in the directory then you can enter the name followed by .py+ to compile it. If not, then you can input its path with the name.py+ and it should also work.
 
 ```clear``` Clears the console.
 
