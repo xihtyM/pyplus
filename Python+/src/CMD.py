@@ -16,7 +16,7 @@ def find_nth(text, find, c):
     return start+1;
 
 def base64(i):
-    if(i.isdigit):
+    if(isinstance(i,int)):
         endText = b64[i];
         return endText;
     else:
