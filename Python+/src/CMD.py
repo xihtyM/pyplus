@@ -15,7 +15,7 @@ def find_nth(text, find, c):
     return start+1;
 
 class KeyWords:
-    multi_char_keywords = ["print","return","func","let","end","true","false","if"];
+    multi_char_keywords = ["print","return","func","let","end","true","false","if","else"];
     seperator = "\n";
     whitespace = " ";
 
