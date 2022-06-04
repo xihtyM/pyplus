@@ -23,8 +23,8 @@ class Console:
     def __init__(self):
         self.directory = directory.read();
         while(True):
-            i = input(self.directory+cmdSep+" ");
-            self.run(i.lower());
+            i = input(self.directory+cmdSep+" ").lower();
+            self.run(i);
 
     #COMPILER
 
@@ -84,7 +84,7 @@ class Console:
                 dir_.write(i);
             self.directory = i;
         else:
-            console.error("Error 0: Path was not found");
+            console.error("Error: Path was not found");
     
     #OPEN CODE
 
@@ -99,7 +99,7 @@ class Console:
                 with open(i,"r") as dir_:
                     self.formatter(dir_.read(),i);
             else:
-                console.error("Error 0: Path was not found");
+                console.error("Error: Path was not found");
 
     #CLEAR
 
