@@ -1,5 +1,6 @@
-# python_scripts
-All of my public python projects
+# Python+
+
+Installation:
 
 To install Python+ simply:
 
@@ -12,6 +13,7 @@ To install Python+ simply:
 
 4. Run the Python+ Installer, specify the directory that you would like it to be installed and the rest should work
 
+Some notes:
 
 > Use .py+ extension to code, compiled programs compile to .ppy+, sooner or later I will make an interpreter but right now I'm still creating the compiler.
 

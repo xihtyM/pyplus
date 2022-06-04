@@ -1,5 +1,5 @@
-import sys
-import subprocess
+import sys;
+import subprocess;
 
 # implement pip as a subprocess:
 # install libs
