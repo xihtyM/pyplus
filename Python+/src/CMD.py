@@ -59,7 +59,7 @@ class Console:
             # BRANCHLESS WAY OF SAYING IF IT IS THE LAST ITERATION, MAKE IT THE FULL LENGTH OF THE STRING
             nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
             # REMOVE '\n' AND INDENTS
-            c = code[prev:nth].replace("\n","");
+            rc = code[prev:nth].replace("\n","");
             # REPLACES KEYWORDS WITH NUMBER ASSOCIATED WITH IT
             for x,v in enumerate(KeyWords.multi_char_keywords): c = c.replace(v,base64(x+2));
             tabs = "";
@@ -70,7 +70,7 @@ class Console:
                 break;
             tabs = tabs.replace("    ","\t").replace("\t","1");
             if(" " in tabs):
-                console.error('Error: Unexpected indentation at line', str(i+1)+"\n"+'Got', tabs.count(" "), '(Expected: 4) spaces\nAt:',c.lstrip());
+                console.error('Error: Unexpected indentation at line', str(i+1)+"\n"+'Got', tabs.count(" "), '(Expected: 4) spaces\nAt:',rc.lstrip());
                 return -1;
             c = tabs+c.lstrip();
             SeperatedCode.append(c);
