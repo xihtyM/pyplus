@@ -15,7 +15,7 @@ def find_nth(text, find, c):
     return start+1;
 
 class KeyWords:
-    mutli_char_keywords = ["print","return","func","let","class","true","false"];
+    multi_char_keywords = ["print","return","func","let","end","true","false","if"];
     seperator = "\n";
     whitespace = " ";
 
@@ -30,16 +30,20 @@ class Console:
 
     def compile(self,lc,path):
         path = path[0:path.find(".")]+".ppy+";
-        with open(path,"w") as writeFile:
-            writeFile.write(lc);
-        print("Successfully compiled without errors!");
+        try:
+            with open(path,"w") as writeFile:
+                writeFile.write(lc);
+        except Exception as err:
+            console.error("Error opening/writing to file.\n"+err);
+            pass;
+        console.success("Successfully compiled without errors!");
         
-    #LEXXER
+    #FORMATTER
 
-    def lex(self,code,path):
+    def formatter(self,code,path):
         SeperatedCode = [];
         seperations = code.count("\n")+1;
-        LexxedCode = "";
+        fCode = "";
         prev = 0;
 
         for i in range(seperations):
@@ -47,6 +51,7 @@ class Console:
             nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
             # REMOVE '\n' AND INDENTS
             c = code[prev:nth].replace("\n","");
+            for x,v in enumerate(KeyWords.multi_char_keywords): c = c.replace(v,str(x+2));
             tabs = "";
             for x,v in enumerate(c):
                 if(v == " "):
@@ -61,14 +66,12 @@ class Console:
             SeperatedCode.append(c);
             prev = nth;
 
-        # LEX
+        # FORMAT
 
         for i,line in enumerate(SeperatedCode):
-            c = line;
-            #if(c in KeyWords.mutli_char_keywords):
-            LexxedCode += c + "0";
+            fCode += line.replace(" ","") + "0";
 
-        self.compile(LexxedCode,path);
+        self.compile(fCode,path);
         
     #CHANGE DIRECTORY
     
@@ -81,7 +84,7 @@ class Console:
                 dir_.write(i);
             self.directory = i;
         else:
-            print("Error 0: Path was not found");
+            console.error("Error 0: Path was not found");
     
     #OPEN CODE
 
@@ -89,14 +92,14 @@ class Console:
         i = input(cmdSep+" ");
         if(os.path.exists(i)):
             with open(i,"r") as dir_:
-                self.lex(dir_.read(),i);
+                self.formatter(dir_.read(),i);
         else:
             i = self.directory+"\\"+i;
             if(os.path.exists(i)):
                 with open(i,"r") as dir_:
-                    self.lex(dir_.read(),i);
+                    self.formatter(dir_.read(),i);
             else:
-                print("Error 0: Path was not found");
+                console.error("Error 0: Path was not found");
 
     #CLEAR
 
@@ -109,10 +112,22 @@ class Console:
     def run(self,i):
         # Change default directory command
         if(i == "chdir"):
-            self.chdir();
+            try:
+                self.chdir();
+            except Exception as err:
+                console.error("Error changing directory.\n"+err);
+                pass;
         if(i == "py+ compile"):
-            self.open();
+            try:
+                self.open();
+            except Exception as err:
+                console.error("Error opening compiler.\n"+err);
+                pass;
         if(i == "clear"):
-            self.clear();
+            try:
+                self.clear();
+            except Exception as err:
+                console.error("Error clearing command line.\n"+err);
+                pass;
 
 Console();
