@@ -59,9 +59,9 @@ class Console:
             # BRANCHLESS WAY OF SAYING IF IT IS THE LAST ITERATION, MAKE IT THE FULL LENGTH OF THE STRING
             nth = (find_nth(code,KeyWords.seperator,i+1),len(code))[(seperations-i)*len(code) < len(code)+1];
             # REMOVE '\n' AND INDENTS
-            rc = code[prev:nth].replace("\n","");
+            rc,c = code[prev:nth].replace("\n","");
             # REPLACES KEYWORDS WITH NUMBER ASSOCIATED WITH IT
-            for x,v in enumerate(KeyWords.multi_char_keywords): c = rc.replace(v,base64(x+2));
+            for x,v in enumerate(KeyWords.multi_char_keywords): c = c.replace(v,base64(x+2));
             tabs = "";
             for x,v in enumerate(c):
                 if(v == " "):
