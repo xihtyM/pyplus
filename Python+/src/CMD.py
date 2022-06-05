@@ -4,7 +4,6 @@ from tkinter import *;
 
 # ALL PRE-DEFINED VARIABLES
 
-b64 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-/";
 directory = open(os.getcwd()+"\\vars\\dir.txt","r");
 cmdSep = ">>";
 
@@ -14,14 +13,6 @@ def find_nth(text, find, c):
         start = text.find(find, start+len(find));
         c -= 1;
     return start+1;
-
-def base64(i):
-    if(isinstance(i,int)):
-        endText = b64[i];
-        return endText;
-    else:
-        console.error("Cannot be encrypted to base64.");
-        return -1;
 
 class KeyWords:
     multi_char_keywords = ["print","return","func","let","end","true","false","if","else"];
@@ -61,7 +52,11 @@ class Console:
             # REMOVE '\n' AND INDENTS
             rc = c = code[prev:nth].replace("\n","");
             # REPLACES KEYWORDS WITH NUMBER ASSOCIATED WITH IT
-            for x,v in enumerate(KeyWords.multi_char_keywords): c = c.replace(v,base64(x+2));
+            for x,v in enumerate(KeyWords.multi_char_keywords):
+                if(v in rc):
+                    c = c.replace(v,"");
+                    operator_ = v;
+                    break;
             tabs = "";
             for x,v in enumerate(c):
                 if(v == " "):
@@ -73,7 +68,7 @@ class Console:
                 console.error('Error: Unexpected indentation at line', str(i+1)+"\n"+'Got', tabs.count(" "), '(Expected: 4) spaces\nAt:',rc.lstrip());
                 return -1;
             c = tabs+c.lstrip();
-            SeperatedCode.append(c);
+            SeperatedCode.append([operator_,c]);
             prev = nth;
 
         # FORMAT
