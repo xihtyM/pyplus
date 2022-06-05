@@ -54,7 +54,7 @@ class Console:
             # REPLACES KEYWORDS WITH NUMBER ASSOCIATED WITH IT
             for x,v in enumerate(KeyWords.multi_char_keywords):
                 if(v in rc):
-                    c = c.replace(v,"");
+                    c = c.replace(v,"").lstrip();
                     operator_ = v;
                     break;
             tabs = "";
